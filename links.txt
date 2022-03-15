@@ -1,0 +1,76 @@
+Initial links:
+
+How to change windows settings by reg.exe:
+https://stackoverflow.com/questions/70688824/how-to-change-windows-color-theme 
+change color:
+https://stackoverflow.com/questions/63816241/set-the-color-settings-of-windows-10-in-python
+key windows personilizations:
+https://superuser.com/questions/1245923/registry-keys-to-change-personalization-settings/1395560#1395560
+reg.exe for turning on color start,taskbar etc:
+Computer\HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize		\colorPrevalence
+Computer\HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows		\DWM
+add inactive color:
+https://www.howtogeek.com/258162/how-to-add-color-to-inactive-title-bars-in-windows-10/
+How to log reg.exe:
+https://superuser.com/questions/1295855/are-windows-10-personalization-settings-available-in-registry?rq=1
+
+Change background:
+https://stackoverflow.com/questions/1977694/how-can-i-change-my-desktop-background-with-python
+
+color:
+https://stackoverflow.com/questions/66355814/change-windows-10-background-solid-color-in-python
+
+
+
+Detect language:
+https://stackoverflow.com/questions/42047253/how-to-detect-current-keyboard-language-in-python 
+
+
+
+
+
+
+Program should:
+
+configure screen in taskbar (https://www.tutorialspoint.com/how-to-make-a-system-tray-application-in-tkinter): 
+set a color for each language 
+turn on the ability to change these color settings, personalization, color by checking
+1. "Start, taskbar , and action center"
+2. "Title bars and window boarders"
+(can probably be done using reg.exe)
+
+when running:
+1. initate, create HKCU\SOFTWARE\Microsoft\Windows\DWM\AccentColorInactive
+2. detect it shift + Alt or windows_key + space is pressed
+3. then change task bar color and windows header color.
+
+for headers:
+HKCU\SOFTWARE\Microsoft\Windows\DWM\AccentColor		ff3a7ec2
+HKCU\SOFTWARE\Microsoft\Windows\DWM\AccentColorInactive		ff3a7ec2
+
+missing reg.exe for taskbar??
+Should work, but cannot eddit (error: Cannot edit AccentColor: Error writing the values's new contents.):
+HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\SystemProtectedUserData\S-1-5-21-3654873712-1356392517-3991515817-1001\AnyoneRead\Colors\AccentColor
+HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\SystemProtectedUserData\S-1-5-21-3654873712-1356392517-3991515817-1001\AnyoneRead\Colors\StartColor
+
+ff3a7ec2
+
+
+eddit using reg.exe
+reg add HKCU\SOFTWARE\Microsoft\Windows\DWM /t REG_DWORD /v AccentColor /d 16711680 /f
+reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\SystemProtectedUserData\S-1-5-21-3654873712-1356392517-3991515817-1001\AnyoneRead\Colors /t REG_DWORD /v AccentColor /d 16711680 /f
+
+
+
+PowerShell:
+https://www.thelazyadministrator.com/2019/08/08/configure-windows-10-accent-color-with-intune-and-powershell/
+
+
+Accent Color:
+Get Accent Color C++: https://devblogs.microsoft.com/oldnewthing/20170405-00/?p=95905
+https://stackoverflow.com/questions/63159666/get-windows-10-theme-color-in-classic-c-winapi-win32-application 
+C#: https://stackoverflow.com/questions/34696332/change-the-taskbar-color-of-windows-10
+
+WindowColor API:
+https://docs.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/microsoft-windows-shell-setup-themes-windowcolor 
+https://stackoverflow.com/questions/39453426/change-the-color-of-the-taskbar
