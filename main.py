@@ -19,6 +19,10 @@ def detect_language_change():
 
 class EventHandler:
     def __init__(self, trigger, action) -> None:
+        ''' Trigger is responsible to figure out when to do something
+        Action is responsible for the action. Hence action will have to collect
+        all the languages and create the color image etc...
+        '''
         self.trigger = trigger
         self.action = action
     
