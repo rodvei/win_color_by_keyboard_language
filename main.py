@@ -5,6 +5,8 @@ import datetime
 from windows_interfaces.detect_language import KeyboardLanguageDetector
 from windows_interfaces.sys_windows_api import BackgroundHandler
 
+# fix Windows + L lock
+# https://pypi.org/project/global-hotkeys/
 
 class EventHandler:
     def __init__(self, trigger_info, actor, name=None) -> None:
@@ -22,14 +24,17 @@ class EventHandler:
         print(f'{datetime.datetime.now()}|{self.name}: Keyboard language set to "{info}"')
 
 
-def main():
+def start_language_background_handler(name='Handler#1'):
     keyboard_detector = KeyboardLanguageDetector()
     backgrund_handler = BackgroundHandler()
-    event_handller = EventHandler(keyboard_detector, backgrund_handler, 'Handler#1')
-    print(f'{datetime.datetime.now()}: Keyboard language taskbar color program started')
+    event_handller = EventHandler(keyboard_detector, backgrund_handler, name)
+    print(f'{datetime.datetime.now()}: Keyboard language background handler started')
     event_handller.run()
     keyboard.add_hotkey('alt+shift', event_handller.run)
     keyboard.add_hotkey('windows+space', event_handller.run)
+
+def main():
+    start_language_background_handler()
     keyboard.wait('ctrl+q')
     print(f'{datetime.datetime.now()}: Quiting keyboard language taskbar color program')
     keyboard.unhook_all()

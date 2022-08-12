@@ -1,6 +1,7 @@
 import os
 import json
 import ctypes
+import win32con
 from PIL import Image
 import matplotlib.colors as mcolors
 
@@ -12,6 +13,7 @@ import matplotlib.colors as mcolors
 class ColorMaper(object):
 	mapping_path = 'img'
 	hex_colors = ['#141414'] + list(mcolors.TABLEAU_COLORS.values())[1:]
+
 	def __init__(self) -> None:
 		self.screen_size = self._get_screen_size()
 		self.get_file_path(self._clean_filename('English - United States'))
@@ -48,11 +50,14 @@ class ColorMaper(object):
 
 
 class BackgroundHandler(object):
-	SPI_SETDESKWALLPAPER = 20
 	def __init__(self) -> None:
 		self.color_maper = ColorMaper()
 	
 	def action(self, text):
 		rel_img_path = self.color_maper.get_file_path(text)
 		full_img_path = os.path.abspath(rel_img_path)
-		ctypes.windll.user32.SystemParametersInfoW(self.SPI_SETDESKWALLPAPER,0, full_img_path, 3)
+		print(f'win32con.SPIF_UPDATEINIFILE "{win32con.SPIF_UPDATEINIFILE}"')
+		print(f'win32con.SPIF_SENDCHANGE "{win32con.SPIF_SENDCHANGE}"')
+		changed = win32con.SPIF_UPDATEINIFILE | win32con.SPIF_SENDCHANGE
+		print(f'Changed option: "{changed}"')
+		ctypes.windll.user32.SystemParametersInfoW(win32con.SPI_SETDESKWALLPAPER, 0, full_img_path, changed)
