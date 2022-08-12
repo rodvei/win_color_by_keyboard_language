@@ -1,8 +1,4 @@
 {
-	"background_img": {
-		"0x414": "img\\background_no.png",
-		"0x409": "img\\background_en.png"
-	},
 	"hex_to_language": {
 		"0x436": "Afrikaans - South Africa",
 		"0x041c": "Albanian - Albania",
