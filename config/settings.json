@@ -1,4 +1,9 @@
 {
+	"logging": {
+		"format": "%(asctime)s|%(name)s|%(levelname)s: %(message)s",
+		"datefmt": "%Y-%m-%dT%H:%M:%S"
+	},
+
 	"hex_to_language": {
 		"0x436": "Afrikaans - South Africa",
 		"0x041c": "Albanian - Albania",

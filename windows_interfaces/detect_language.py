@@ -1,13 +1,13 @@
 import ctypes
 import json
+import logging
+from config.logic import get_settings
 
+logger = logging.getLogger(__name__)
 
 class KeyboardLanguageDetector(object):
-    settings_path = 'settings.json'
-    
     def __init__(self) -> None:
-         with open(self.settings_path, 'r') as f:
-            self.hex_to_language = json.load(f)['hex_to_language']
+        self.hex_to_language = get_settings()['hex_to_language']
 
     def get(self):
         return(self.get_keyboard_language())
