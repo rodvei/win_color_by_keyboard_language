@@ -1,10 +1,10 @@
 import os
-import json
 import ctypes
 import win32con
 import logging
 from PIL import Image
 import matplotlib.colors as mcolors
+from back_end.resource_utils import resource_path
 
 logger = logging.getLogger(__name__)
 
@@ -54,7 +54,8 @@ class ColorMaper(object):
 		return(screen_size)
 	
 	def _get_img_folder_path(self):
-		background_img_path = os.path.join(os.getcwd(), "background_img")
+		# background_img_path = os.path.join(os.getcwd(), "background_img")
+		background_img_path = resource_path(r'../assets/background_img')
 
 		# Check if the folder exists, create it if not
 		if not os.path.exists(background_img_path):

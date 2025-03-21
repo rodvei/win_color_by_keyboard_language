@@ -3,8 +3,8 @@ import logging
 import threading
 import datetime
 from pynput  import keyboard
-from windows_interfaces.detect_language import KeyboardLanguageDetector
-from windows_interfaces.sys_windows_api import BackgroundHandler
+from back_end.windows_interfaces.detect_language import KeyboardLanguageDetector
+from back_end.windows_interfaces.sys_windows_api import BackgroundHandler
 
 logger = logging.getLogger(__name__)
 
@@ -36,6 +36,7 @@ def periodic_check(interval=5, name='Periodic_trigger'):
     backgrund_handler = BackgroundHandler()
     event_handler = KeyboardLanguageHandler(keyboard_detector, backgrund_handler, name)
     while True:
+        logger.info(f'Periodic check..."')
         event_handler.run()
         time.sleep(interval)
 
@@ -51,6 +52,7 @@ def start_language_background_handler(name='Keyboard_trigger'):
     # Event listener
     def on_press(key):
         if key in [keyboard.Key.alt, keyboard.Key.shift, keyboard.Key.cmd]:
+            logger.info(f'Key Pressed check..."')
             event_handler.run()
 
     with keyboard.Listener(on_press=on_press) as listener:
@@ -58,8 +60,10 @@ def start_language_background_handler(name='Keyboard_trigger'):
 
 def back_end_main():
     # Start periodic check thread
+    logging.info("Starting back-end processes...")
     threading.Thread(target=periodic_check, args=(3, ), daemon=True).start()
     threading.Thread(target=start_language_background_handler, daemon=True).start()
+    logging.info("Back-end processes are running!")
     # keyboard.wait('ctrl+q')
     # print(f'{datetime.datetime.now()}: Quiting keyboard language taskbar color program')
     # keyboard.unhook_all()

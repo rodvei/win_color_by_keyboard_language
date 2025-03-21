@@ -1,1 +1,1 @@
-pyinstaller --onefile --noconsole --add-data "config\settings.json:." --add-data "config\system_tray_icon.png:." main.py
+pyinstaller --onefile --noconsole --add-data "assets\default_settings.json:." --add-data "assets\system_tray_icon.png:." src/main.py

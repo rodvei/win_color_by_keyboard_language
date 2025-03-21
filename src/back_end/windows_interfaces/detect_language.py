@@ -1,7 +1,7 @@
 import ctypes
 import json
 import logging
-from config.logic import get_settings
+from back_end.settings import get_settings
 
 logger = logging.getLogger(__name__)
 

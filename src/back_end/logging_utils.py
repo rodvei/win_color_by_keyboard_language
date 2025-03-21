@@ -1,7 +1,7 @@
 import os
 import sys
 import logging
-from config.logic import get_settings
+from back_end.settings import get_settings
 
 def setup_logging():
     # Check if running inside a PyInstaller executable

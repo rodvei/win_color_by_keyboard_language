@@ -1,6 +1,8 @@
+import logging
 from pystray import Icon, Menu, MenuItem
-from config.logic import get_icon
+from ui.img_handeling import get_icon
 
+logger = logging.getLogger(__name__)
 
 # Handle quitting the application
 def on_quit(icon):
@@ -10,6 +12,7 @@ def on_quit(icon):
 
 def front_end_main():
     # Define the menu
+    logging.info("Starting front-end processes...")
     menu = Menu(MenuItem('Quit', lambda icon: on_quit(icon)))
     icon = Icon(
         "KeyboardLang",
@@ -18,3 +21,4 @@ def front_end_main():
         menu
     )
     icon.run()
+    logging.info("Front-end processes are running!")
